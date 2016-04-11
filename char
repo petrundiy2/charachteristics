@@ -1,0 +1,125 @@
+__author__ = 'student'
+import random
+
+
+class Monoalphabet:
+    alphabet = ['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ы','ъ','э','ю','я']
+
+    def __init__(self, keytable):
+        lowercase_code = {self.alphabet[i]:keytable[i] for i in range(len(self.alphabet))}
+        uppercase_code = {self.alphabet[i].upper():keytable[i].upper() for i in range(len(self.alphabet))}
+        self._encode = dict(lowercase_code)
+        self._encode.update(uppercase_code)
+        self._decode = dict(uppercase_code)
+        self._decode.update(lowercase_code)
+
+    def encode(self, line):
+        if len(line) == 1:
+            return self._encode[line] if line in self._encode else line
+        else:
+            return ''.join([self.encode(char) for char in line])
+
+    def decode(self, line):
+        if len(line)==1:
+            return self._decode[line] if line in self._decode else line
+        else:
+            return ''.join([self.decode(char) for char in line])
+
+
+key = Monoalphabet.alphabet[:]
+random.shuffle(key)
+cipher = Monoalphabet(key)
+line = input()
+
+alphabet = ['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ы','ъ','э','ю','я']
+G=[]
+for x in range(len(alphabet)):
+    G.append([])
+for z in range(len(alphabet)):
+    G[z].append(line.count(alphabet[z])/len(line))
+print(G)
+F=[]
+for o in range(len(alphabet)):
+    F.append([])
+K=[]
+for h in range(len(line)):
+    K.append([])
+for i in range(len(G)):
+    if 0.1<G[i][0]<0.12:
+        F[i]='о'
+    elif 0.08<G[i][0]<=0.09:
+        F[i]='е'
+    elif 0.075<G[i][0]<=0.08:
+        F[i]='а'
+    elif 0.07<G[i][0]<=0.075:
+        F[i]='и'
+    elif 0.065<G[i][0]<=0.07:
+        F[i]='н'
+    elif 0.06<G[i][0]<=0.065:
+        F[i]='т'
+    elif 0.05<G[i][0]<=0.06:
+        F[i]='с'
+    elif 0.046<G[i][0]<=0.05:
+        F[i]='р'
+    elif 0.044<G[i][0]<=0.046:
+        F[i]='в'
+    elif 0.04<G[i][0]<=0.044:
+        F[i]='л'
+    elif 0.033<G[i][0]<=0.036:
+        F[i]='к'
+    elif 0.03<G[i][0]<=0.033:
+        F[i]='м'
+    elif 0.0285<G[i][0]<=0.03:
+        F[i]='д'
+    elif 0.027<G[i][0]<=0.0285:
+        F[i]='п'
+    elif 0.023<G[i][0]<=0.027:
+        F[i]='у'
+    elif 0.0195<G[i][0]<=0.23:
+        F[i]='я'
+    elif 0.018<G[i][0]<=0.0195:
+        F[i]='ы'
+    elif 0.017<G[i][0]<=0.018:
+        F[i]='ь'
+    elif 0.0166<G[i][0]<=0.017:
+        F[i]='г'
+    elif 0.0162<G[i][0]<=0.0166:
+        F[i]='з'
+    elif 0.015<G[i][0]<=0.0162:
+        F[i]='б'
+    elif 0.0135<G[i][0]<=0.015:
+        F[i]='ч'
+    elif 0.0105<G[i][0]<=0.0135:
+        F[i]='й'
+    elif 0.0095<G[i][0]<=0.0105:
+        F[i]='х'
+    elif 0.009<G[i][0]<=0.0095:
+        F[i]='ж'
+    elif 0.0066<G[i][0]<=0.008:
+        F[i]='ш'
+    elif 0.006<G[i][0]<=0.0066:
+        F[i]='ю'
+    elif 0.0045<G[i][0]<=0.0051:
+        F[i]='ц'
+    elif 0.0034<G[i][0]<=0.004:
+        F[i]='щ'
+    elif 0.003<G[i][0]<=0.0034:
+        F[i]='э'
+    elif 0.002<G[i][0]<=0.003:
+        F[i]='ф'
+    elif 0.00027<G[i][0]<=0.0005:
+        F[i]='ъ'
+    elif 0.0001<G[i][0]<=0.00016:
+        F[i]='ё'
+print(F)
+b=''
+for x in range(len(line)):
+    for y in range(len(F)):
+        if line[x]==alphabet[y] and F[y]!=[]:
+            b+=F[y]
+    if line[x]==' ':
+        b+=' '
+for x in range(len(K)):
+    if len(K[x])!=0:
+        b+=K[x][0]
+print(b)
