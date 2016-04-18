@@ -1,0 +1,14 @@
+__author__ = 'student'
+alphab=['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ы','ъ','э','ю','я']
+print(alphab[32])
+f=[]
+k=[]
+for key in range(32):
+    k=[]
+    f.append(alphab)
+    for x in range(1,33):
+        k.append (alphab[x])
+    k.append(alphab[0])
+    alphab=k
+for i in range(len(f)):
+    print (f[i])
