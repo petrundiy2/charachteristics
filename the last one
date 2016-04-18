@@ -1,0 +1,87 @@
+__author__ = 'student'
+
+class Vigenere:
+    alphabet = "чнъгсдмеьйэшозаливюыхрфбпжщтцякуё"
+
+    def __init__(self, keyword):
+        self.alphaindex = {self.alphabet[index]: index for index in range(len(self.alphabet))}
+        self.key = [self.alphaindex[letter] for letter in keyword.lower()]
+
+    def caesar(self, letter, shift):
+        if letter in self.alphaindex:  # юывлпачё нхшъч
+            index = (self.alphaindex[letter] + shift)%len(self.alphabet)
+            cipherletter = self.alphabet[index]
+        elif letter.lower() in self.alphaindex:  # ьчгочъачё нхшъч
+            cipherletter = self.caesar(letter.lower(), shift).upper()
+        else:
+            cipherletter = letter
+        return cipherletter
+
+    def encode(self, line, key = None):
+        if not key:
+            key = self.key
+        ciphertext = []
+        i = 0
+        for letter in line:
+            shift = key[i]
+            cipherletter = self.caesar(letter, shift)
+            ciphertext.append(cipherletter)
+            i = (i + 1)%len(key)
+
+        return ''.join(ciphertext)
+
+    def decode(self, line):
+        pass  # FIXME
+
+
+keyword = input('keyword=')
+cipher = Vigenere(keyword)
+
+line = input()
+line=line.lower()
+alphab=['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ы','ъ','э','ю','я']
+f=[]
+k=[]
+for key in range(32):
+    k=[]
+    f.append(alphab)
+    for x in range(1,33):
+        k.append (alphab[x])
+    k.append(alphab[0])
+    alphab=k
+b=''
+for x in range(len(line)):
+    if line[x] in alphab:
+        for i in range(len(f)):
+            for j in range(len(f[i])):
+                if x%8==0 and f[i][0]==keyword[0] and f[0][j]==line[x]:
+                    b+=f[i][j]
+                    break
+                if x%8==1 and f[i][0]==keyword[1] and line[x]==f[0][j]:
+                    b+=f[i][j]
+                    break
+                if x%8==2 and f[i][0]==keyword[2] and line[x]==f[0][j]:
+                    b+=f[i][j]
+                    break
+                if x%8==3 and f[i][0]==keyword[3] and line[x]==f[0][j]:
+                    b+=f[i][j]
+                    break
+                if x%8==4 and f[i][0]==keyword[4] and line[x]==f[0][j]:
+                    b+=f[i][j]
+                    break
+                if x%8==5 and f[i][0]==keyword[5] and line[x]==f[0][j]:
+                    b+=f[i][j]
+                    break
+                if x%8==6 and f[i][0]==keyword[6] and line[x]==f[0][j]:
+                    b+=f[i][j]
+                    break
+                if x%8==7 and f[i][0]==keyword[7] and line[x]==f[0][j]:
+                    b+=f[i][j]
+                    break
+    else:
+        b+=line[x]
+for x in range(len(line)):
+    if line[x]=='1':
+        print(x)
+        break
+print(b)
