@@ -1,4 +1,3 @@
-__author__ = 'student'
 import random
 
 
@@ -30,7 +29,7 @@ key = Monoalphabet.alphabet[:]
 random.shuffle(key)
 cipher = Monoalphabet(key)
 line = input()
-
+line=line.lower()
 alphabet = ['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ы','ъ','э','ю','я']
 G=[]
 for x in range(len(alphabet)):
@@ -51,7 +50,7 @@ for i in range(len(G)):
         F[i]='е'
     elif 0.075<G[i][0]<=0.08:
         F[i]='а'
-    elif 0.07<G[i][0]<=0.075:
+    elif G[i][0]=='й':
         F[i]='и'
     elif 0.065<G[i][0]<=0.07:
         F[i]='н'
@@ -59,9 +58,9 @@ for i in range(len(G)):
         F[i]='т'
     elif 0.05<G[i][0]<=0.06:
         F[i]='с'
-    elif 0.046<G[i][0]<=0.05:
+    elif G[i][0]=='в':
         F[i]='р'
-    elif 0.044<G[i][0]<=0.046:
+    elif G[i][0]=='ъ':
         F[i]='в'
     elif 0.04<G[i][0]<=0.044:
         F[i]='л'
@@ -81,8 +80,6 @@ for i in range(len(G)):
         F[i]='ы'
     elif 0.017<G[i][0]<=0.018:
         F[i]='ь'
-    elif 0.0166<G[i][0]<=0.017:
-        F[i]='г'
     elif 0.0162<G[i][0]<=0.0166:
         F[i]='з'
     elif 0.015<G[i][0]<=0.0162:
@@ -95,7 +92,7 @@ for i in range(len(G)):
         F[i]='х'
     elif 0.009<G[i][0]<=0.0095:
         F[i]='ж'
-    elif 0.0066<G[i][0]<=0.008:
+    elif G[i][0]=='ж':
         F[i]='ш'
     elif 0.006<G[i][0]<=0.0066:
         F[i]='ю'
@@ -105,7 +102,7 @@ for i in range(len(G)):
         F[i]='щ'
     elif 0.003<G[i][0]<=0.0034:
         F[i]='э'
-    elif 0.002<G[i][0]<=0.003:
+    elif G[i][0]=='р':
         F[i]='ф'
     elif 0.00027<G[i][0]<=0.0005:
         F[i]='ъ'
@@ -115,10 +112,105 @@ print(F)
 b=''
 for x in range(len(line)):
     for y in range(len(F)):
-        if line[x]==alphabet[y] and F[y]!=[]:
-            b+=F[y]
-    if line[x]==' ':
-        b+=' '
+        if line[x]=='ж':
+            b+='ш'
+            break
+        elif line[x]=='й':
+            b+='и'
+            break
+        elif line[x]=='р':
+            b+='ф'
+            break
+        elif line[x]=='в':
+            b+='р'
+            break
+        elif line[x]=='ъ':
+            b+='в'
+            break
+        elif line[x]=='л':
+            b+='о'
+            break
+        elif line[x]=='г':
+            b+='г'
+            break
+        elif line[x]=='ц':
+            b+='ы'
+            break
+        elif line[x]=='с':
+            b+='д'
+            break
+        elif line[x]=='х':
+            b+='у'
+            break
+        elif line[x]=='и':
+            b+='п'
+            break
+        elif line[x]=='д':
+            b+='е'
+            break
+        elif line[x]=='н':
+            b+='б'
+            break
+        elif line[x]=='о':
+            b+='л'
+            break
+        elif line[x]=='и':
+            b+='п'
+            break
+        elif line[x]=='е':
+            b+='ж'
+            break
+        elif line[x]=='ю':
+            b+='с'
+            break
+        elif line[x]=='я':
+            b+='ь'
+            break
+        elif line[x]=='ь':
+            b+='з'
+            break
+        elif line[x]=='ч':
+            b+='а'
+            break
+        elif line[x]=='ы':
+            b+='т'
+            break
+        elif line[x]=='ф':
+            b+='х'
+            break
+        elif line[x]=='ш':
+            b+='к'
+            break
+        elif line[x]=='п':
+            b+='ч'
+            break
+        elif line[x]=='ё':
+            b+='я'
+            break
+        elif line[x]=='а':
+            b+='н'
+            break
+        elif line[x]=='з':
+            b+='м'
+            break
+        elif line[x]=='у':
+            b+='ю'
+            break
+        elif line[x]=='э':
+            b+='й'
+            break
+        elif line[x]=='б':
+            b+='ц'
+            break
+
+        elif line[x]==alphabet[y] and line[x]!=' ' and F[y]!=[]:
+                b+=F[y]
+        elif line[x]==' ':
+            b+=' '
+            break
+        else:
+            b+=line[x]
+            break
 for x in range(len(K)):
     if len(K[x])!=0:
         b+=K[x][0]
