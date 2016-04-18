@@ -34,7 +34,7 @@ class Vigenere:
         pass  # FIXME
 
 
-keyword = input('keyword=')
+keyword='онсффуат'
 cipher = Vigenere(keyword)
 
 line = input()
